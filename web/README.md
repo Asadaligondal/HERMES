@@ -1,33 +1,31 @@
-# Hermes Web — Ticket 1: Auth & Workspace Foundation
+# Hermes Web
 
-Next.js (App Router) + Postgres + Prisma + NextAuth, extending the visual design
-from `../prototype/` into a real app.
+Next.js (App Router) + NextAuth, extending the visual design from `../prototype/`
+into a real app.
 
-## What's implemented (Ticket 1 only)
-- Signup & login screens (NextAuth Credentials provider, JWT sessions)
-- **Dev-only stub auth: no DB check right now.** Typing any email signs you in —
-  `authorize()` in `src/lib/auth.ts` just returns a user for whatever was typed,
-  no Postgres/Docker required. The `Prisma`/`bcrypt`-backed real version is still
-  in git history when the DB comes back.
-- Protected `(app)` layout — redirects to `/login` if not signed in
-- Real `<Sidebar>` component (ported from the static prototype) with active-route
-  highlighting and a working account menu (a derived workspace name, sign out)
-- `/dashboard` is a placeholder — metrics, the setup checklist, and the Academy
-  carousel are Ticket 2
+## Auth — dev-only stub, no DB
+`authorize()` in `src/lib/auth.ts` accepts any email/password typed and signs
+you in; nothing is persisted. Postgres/Prisma were removed entirely (not just
+disconnected) since nothing used them — see git history before commit
+`6688b10` if the real DB-backed version is needed again later.
 
 ## Local setup
 ```bash
 npm install
 npm run dev
 ```
-Then open http://localhost:3000 — it redirects to `/signup` (via `/login`) if
-you're not authenticated yet. Type anything and submit; there's no real
-validation and nothing is persisted (no DB running).
+Open http://localhost:3000 — redirects to `/signup` (via `/login`) if not
+authenticated. Type anything and submit.
 
-**Postgres/Docker are not wired up right now** by request — `docker-compose.yml`
-was removed and nothing at runtime touches Postgres. `prisma/schema.prisma` is
-kept as-is for when Ticket 1's real DB-backed auth comes back.
+## Deploying (Vercel)
+- **Root Directory** must be `web` (the repo also has `prototype/` at the top level)
+- Env vars: `NEXTAUTH_SECRET` (generate fresh, don't reuse the local one) and
+  `NEXTAUTH_URL` (set after the first deploy once you know the assigned URL)
+- No `DATABASE_URL` needed — nothing touches a database right now
+- `engines.node: "22.x"` is pinned in `package.json`; Next 16/React 19/TS 7 are
+  new enough that Vercel's default Node version may not match otherwise
 
-## Only nav pages that exist right now
-`/dashboard` is the only real page — `Chat`, `Sessions`, `Tasks`, `Skills`, and
-`Integrations` in the sidebar link to routes that don't exist yet (Tickets 2-7).
+## Pages
+Dashboard, Chat, Sessions, Files, Tasks, Skills, Integrations, Config, Keys —
+all real routes with static/sample content, styled consistently via
+`src/app/globals.css`. None are wired to a real backend yet.
