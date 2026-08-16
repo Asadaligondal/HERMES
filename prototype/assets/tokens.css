@@ -1,0 +1,57 @@
+/* Merged design tokens: Hermes structure + Viktor visual language.
+   Source: hermes_cli/skin_engine.py (Hermes) + crawled Viktor production CSS. */
+:root {
+  --color-bg: #18181b;              /* Viktor zinc-900 */
+  --color-bg-elevated: #1f1f23;
+  --color-sidebar-bg: #141416;
+  --color-border: #27272a;          /* Viktor zinc-800 */
+  --color-text: #fafafa;            /* Viktor zinc-50 */
+  --color-text-muted: #a1a1aa;      /* Viktor zinc-400 */
+  --color-text-sidebar: #d4d4d8;    /* Viktor zinc-300 */
+  --color-highlight: #d1c2f4;       /* Viktor signature lavender accent */
+  --color-highlight-dim: rgba(209, 194, 244, 0.14);
+  --color-success: #10b981;         /* emerald-600ish, matches Hermes ui_ok intent */
+  --color-warning: #fb923c;         /* orange-400, matches Hermes ui_warn intent */
+  --color-destructive: #ef4444;     /* red-500ish, matches Hermes ui_error intent */
+  --color-input-bg: #09090b;        /* Viktor zinc-950 */
+  --color-secondary: #27272a;
+
+  /* Gellix isn't freely licensed and had no @font-face in the crawled CSS, so we
+     don't render in it. Satoshi is a real, confirmed substitute: Viktor's own
+     crawled CSS imports it from Fontshare (free, similar contemporary geometric
+     grotesque), with Inter as the next fallback exactly as Viktor's own chain
+     does ("Gellix", "Inter Variable", ui-sans-serif...). */
+  --font-sans: "Satoshi", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Roboto Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-full: 999px;
+
+  --feed-width: 760px;   /* Viktor's chat/feed max-width */
+  --sidebar-width: 240px;
+}
+
+/* Viktor's real crawled CSS toggles a `.light` class on the root and only
+   exposed one concrete light value: --color-shell -> color(srgb .98 .98 .98)
+   (~#fafafa). The rest of the light-mode palette below is derived by
+   flipping the zinc scale the same way the dark tokens above map to it,
+   since the primitives file that defines Viktor's light-mode zinc mapping
+   wasn't part of the crawled CSS. The brand highlight lavender is kept
+   constant across themes, matching how --color-highlight is defined once
+   at :root with no light/dark variant in the source. */
+.light {
+  --color-bg: #fafafa;              /* Viktor's actual --color-shell light value */
+  --color-bg-elevated: #ffffff;
+  --color-sidebar-bg: #f4f4f5;      /* zinc-100 */
+  --color-border: #e4e4e7;          /* zinc-200 */
+  --color-text: #18181b;            /* zinc-900 */
+  --color-text-muted: #71717a;      /* zinc-500 */
+  --color-text-sidebar: #3f3f46;    /* zinc-700 */
+  --color-highlight-dim: rgba(209, 194, 244, 0.28);
+  --color-input-bg: #ffffff;
+  --color-secondary: #f0eefc;       /* faint lavender tint instead of dark zinc-800 */
+}
