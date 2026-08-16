@@ -1,14 +1,16 @@
 "use client";
 
+import { startThemeCircleTransition } from "@/lib/theme-transition";
+
 export function ThemeToggle() {
   return (
     <button
       type="button"
       className="theme-toggle"
       title="Toggle theme"
-      onClick={() => {
-        const isLight = document.documentElement.classList.toggle("light");
-        localStorage.setItem("hermes-theme", isLight ? "light" : "dark");
+      onClick={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        startThemeCircleTransition(rect.left + rect.width / 2, rect.top + rect.height / 2);
       }}
     >
       🌓
