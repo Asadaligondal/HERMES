@@ -15,7 +15,6 @@ export default function DashboardPage() {
     <div className="main">
       <PageHeader title="Dashboard">
         <ThemeToggle />
-        <button className="btn btn-primary">+ New chat</button>
       </PageHeader>
       <div className="content">
         <div className="content-inner">
