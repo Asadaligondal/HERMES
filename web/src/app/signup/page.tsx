@@ -81,6 +81,12 @@ export default function SignupPage() {
             {loading ? "Continuing…" : "Continue with Slack"}
           </button>
 
+          <div className="auth-divider">or</div>
+
+          <button className="auth-cta" type="button">
+            Book a demo
+          </button>
+
           <div className="auth-divider">No credit card required</div>
 
           <div className="auth-footer-link" style={{ marginTop: 0 }}>
