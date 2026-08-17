@@ -676,3 +676,115 @@ button { font-family: inherit; cursor: pointer; }
 }
 .auth-footer-link { text-align: center; font-size: 13px; color: var(--color-text-muted); margin-top: 18px; }
 .auth-footer-link a { color: var(--color-highlight); font-weight: 600; }
+
+/* Signup — split layout with animated gradient/glass left panel */
+.auth-split { display: flex; min-height: 100vh; }
+
+.auth-panel-brand {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: #0f0907;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+}
+.auth-panel-brand .sidebar-brand { color: #fff; font-size: 22px; position: relative; z-index: 2; }
+
+/* One-time rise-and-settle glow on first load, like Viktor's — warm/orange instead of blue */
+.auth-glow {
+  position: absolute;
+  left: 50%;
+  bottom: -10%;
+  width: 140%;
+  height: 90%;
+  transform: translate(-50%, 30%);
+  background: radial-gradient(circle at 50% 100%, rgba(249, 115, 22, 0.55) 0%, rgba(124, 45, 18, 0.35) 45%, transparent 72%);
+  animation: glow-rise 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  pointer-events: none;
+  z-index: 0;
+}
+@keyframes glow-rise {
+  from { transform: translate(-50%, 30%); opacity: 0; }
+  to { transform: translate(-50%, 0%); opacity: 1; }
+}
+
+.auth-blob {
+  position: absolute;
+  z-index: 1;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.55;
+  animation: blob-float 14s ease-in-out infinite;
+}
+.auth-blob-1 { width: 380px; height: 380px; top: 8%; left: 0%; background: linear-gradient(135deg, #f97316, #fbbf24); }
+.auth-blob-2 { width: 320px; height: 320px; bottom: 5%; right: 5%; background: linear-gradient(135deg, #ea580c, #f59e0b); animation-delay: -5s; }
+.auth-blob-3 { width: 260px; height: 260px; bottom: 30%; left: 20%; background: linear-gradient(135deg, #dc2626, #f97316); animation-delay: -9s; }
+
+@keyframes blob-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -24px) scale(1.08); }
+  66% { transform: translate(-24px, 22px) scale(0.94); }
+}
+
+.glass-card {
+  position: relative;
+  z-index: 2;
+  margin: auto;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--radius-2xl);
+  padding: 28px;
+  color: #f4f4f5;
+}
+.glass-quote { font-size: 15px; line-height: 1.6; margin: 0 0 20px; }
+.glass-checklist { display: flex; flex-direction: column; gap: 12px; }
+.glass-checklist-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; }
+.glass-checklist-item svg { width: 15px; height: 15px; color: var(--color-highlight); flex-shrink: 0; margin-top: 2px; }
+.glass-tool-icons { display: inline-flex; align-items: center; gap: 4px; margin-left: 4px; vertical-align: middle; }
+.glass-tool-icons img { width: 16px; height: 16px; border-radius: 4px; background: #fff; }
+
+.brand-footer-tag {
+  position: relative;
+  z-index: 2;
+  font-size: 12px;
+  color: rgba(244, 244, 245, 0.5);
+  font-family: var(--font-mono);
+  text-align: center;
+  margin-top: auto;
+}
+
+.auth-panel-form {
+  flex: 1;
+  background: var(--color-bg);
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 40px;
+}
+.auth-panel-form-top { display: flex; justify-content: flex-end; gap: 8px; }
+.auth-panel-form-body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.auth-heading { font-family: var(--font-display); font-weight: 500; font-size: 30px; letter-spacing: -0.01em; margin: 0 0 28px; max-width: 380px; }
+
+.auth-cta {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 20px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.auth-cta:hover { border-color: var(--color-highlight); }
+.auth-cta img { width: 18px; height: 18px; }
+
+.auth-divider { font-size: 12.5px; color: var(--color-text-muted); margin: 16px 0; }

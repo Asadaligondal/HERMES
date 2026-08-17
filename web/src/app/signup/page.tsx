@@ -4,75 +4,88 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { CheckIcon } from "@/components/icons";
+
+const TOOL_LOGOS = ["slack", "notion", "linear", "github", "figma"];
 
 export default function SignupPage() {
   const router = useRouter();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setError(null);
+  async function handleSlackContinue() {
     setLoading(true);
-
-    // No DB right now — signing in directly with whatever was typed, no signup API call.
-    const res = await signIn("credentials", { name, email, password, redirect: false });
+    // No real Slack OAuth — reuses our existing sign-in stub with a placeholder identity.
+    await signIn("credentials", { name: "Slack User", email: "you@slack-workspace.test", redirect: false });
     setLoading(false);
-
-    if (res?.error) {
-      setError("Something went wrong. Please try again.");
-      return;
-    }
     router.push("/dashboard");
   }
 
   return (
-    <div className="auth-page">
-      <div className="auth-card">
+    <div className="auth-split">
+      <div className="auth-panel-brand">
         <div className="sidebar-brand">HERMES</div>
-        <h1 className="auth-title">Create your workspace</h1>
-        <p className="auth-subtitle">A new workspace is created automatically for you.</p>
 
-        {error && <div className="form-error">{error}</div>}
+        <div className="auth-glow" />
+        <div className="auth-blob auth-blob-1" />
+        <div className="auth-blob auth-blob-2" />
+        <div className="auth-blob auth-blob-3" />
 
-        <form onSubmit={handleSubmit}>
-          <div className="field">
-            <label htmlFor="name">Name</label>
-            <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" />
+        <div className="glass-card">
+          <p className="glass-quote">
+            An AI teammate connected to all your tools, right inside Slack — a low-friction way to get
+            the whole team working with AI.
+          </p>
+          <div className="glass-checklist">
+            <div className="glass-checklist-item">
+              <CheckIcon />
+              <span>
+                Add Hermes to Slack
+                <span className="glass-tool-icons">
+                  <img src="/logos/slack.svg" alt="" />
+                </span>{" "}
+                — no card, live in minutes
+              </span>
+            </div>
+            <div className="glass-checklist-item">
+              <CheckIcon />
+              <span>
+                Hermes connects your tools
+                <span className="glass-tool-icons">
+                  {TOOL_LOGOS.map((slug) => (
+                    <img key={slug} src={`/logos/${slug}.svg`} alt="" />
+                  ))}
+                </span>{" "}
+                and onboards itself
+              </span>
+            </div>
+            <div className="glass-checklist-item">
+              <CheckIcon />
+              <span>Then Hermes gets it done</span>
+            </div>
           </div>
-          <div className="field">
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              autoComplete="email"
-            />
-          </div>
-          <div className="field">
-            <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              type="password"
-              required
-              minLength={8}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete="new-password"
-            />
-          </div>
-          <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
-            {loading ? "Creating…" : "Create account"}
+        </div>
+
+        <div className="brand-footer-tag">Nous Research · Messenger of the Digital Gods</div>
+      </div>
+
+      <div className="auth-panel-form">
+        <div className="auth-panel-form-top">
+          <ThemeToggle />
+        </div>
+        <div className="auth-panel-form-body">
+          <h1 className="auth-heading">Get started with Hermes.</h1>
+
+          <button className="auth-cta" type="button" onClick={handleSlackContinue} disabled={loading}>
+            <img src="/logos/slack.svg" alt="" />
+            {loading ? "Continuing…" : "Continue with Slack"}
           </button>
-        </form>
 
-        <div className="auth-footer-link">
-          Already have an account? <Link href="/login">Log in</Link>
+          <div className="auth-divider">No credit card required</div>
+
+          <div className="auth-footer-link" style={{ marginTop: 0 }}>
+            Already have an account? <Link href="/login">Sign in</Link>
+          </div>
         </div>
       </div>
     </div>

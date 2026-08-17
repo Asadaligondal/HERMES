@@ -224,6 +224,14 @@ export function KeyIcon() {
   );
 }
 
+export function CheckIcon() {
+  return (
+    <svg {...common}>
+      <polyline points="4 12 9 17 20 6" />
+    </svg>
+  );
+}
+
 export function SearchIcon() {
   return (
     <svg {...common}>
