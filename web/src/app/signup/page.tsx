@@ -66,7 +66,7 @@ export default function SignupPage() {
           </div>
         </div>
 
-        <div className="brand-footer-tag">Nous Research · Messenger of the Digital Gods</div>
+        <div className="brand-footer-tag">Nous Research</div>
       </div>
 
       <div className="auth-panel-form">
