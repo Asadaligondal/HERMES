@@ -1,5 +1,7 @@
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { PageHeader } from "@/components/PageHeader";
+import { AutomationsSection } from "@/components/AutomationsSection";
+import { WhatsNewCarousel } from "@/components/WhatsNewCarousel";
 import { ActivityIcon, CalendarIcon, CpuIcon, PlugIcon, ToolIcon } from "@/components/icons";
 
 function TasksDoneIcon() {
@@ -114,6 +116,17 @@ export default function DashboardPage() {
               </a>
             </div>
           </div>
+
+          <div className="dash-section-header">
+            <h2 className="dash-section-title">Recommended automations</h2>
+            <a className="dash-section-link" href="/tasks">
+              View all
+            </a>
+          </div>
+          <div className="dash-section-desc">Automate your workspace by running repeatable tasks on schedule.</div>
+          <AutomationsSection />
+
+          <WhatsNewCarousel />
         </div>
       </div>
     </div>

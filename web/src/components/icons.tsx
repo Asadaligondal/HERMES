@@ -119,6 +119,22 @@ export function ChevronDownIcon() {
   );
 }
 
+export function ChevronLeftIcon() {
+  return (
+    <svg {...common}>
+      <polyline points="15 6 9 12 15 18" />
+    </svg>
+  );
+}
+
+export function ChevronRightIcon() {
+  return (
+    <svg {...common}>
+      <polyline points="9 6 15 12 9 18" />
+    </svg>
+  );
+}
+
 export function FolderIcon() {
   return (
     <svg {...common} fill="currentColor" stroke="none">
@@ -228,6 +244,23 @@ export function CheckIcon() {
   return (
     <svg {...common}>
       <polyline points="4 12 9 17 20 6" />
+    </svg>
+  );
+}
+
+export function ZapIcon() {
+  return (
+    <svg {...common} fill="currentColor" stroke="none">
+      <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" />
+    </svg>
+  );
+}
+
+export function CloseIcon() {
+  return (
+    <svg {...common}>
+      <line x1="6" y1="6" x2="18" y2="18" />
+      <line x1="18" y1="6" x2="6" y2="18" />
     </svg>
   );
 }
