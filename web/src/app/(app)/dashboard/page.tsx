@@ -77,7 +77,10 @@ export default function DashboardPage() {
 
             <div className="setup-row">
               <div className="setup-thumb" style={{ background: "linear-gradient(135deg,#a78bfa,#f472b6)" }}>
-                <PlugIcon />
+                <div className="setup-thumb-glow" />
+                <div className="setup-thumb-glass">
+                  <PlugIcon />
+                </div>
               </div>
               <div className="setup-row-body">
                 <div className="setup-row-title">
@@ -92,7 +95,10 @@ export default function DashboardPage() {
 
             <div className="setup-row">
               <div className="setup-thumb" style={{ background: "linear-gradient(135deg,#34d399,#22d3ee)" }}>
-                <CpuIcon />
+                <div className="setup-thumb-glow" />
+                <div className="setup-thumb-glass">
+                  <CpuIcon />
+                </div>
               </div>
               <div className="setup-row-body">
                 <div className="setup-row-title">Set a default model</div>
@@ -103,7 +109,10 @@ export default function DashboardPage() {
 
             <div className="setup-row">
               <div className="setup-thumb" style={{ background: "linear-gradient(135deg,#fb923c,#fbbf24)" }}>
-                <CalendarIcon />
+                <div className="setup-thumb-glow" />
+                <div className="setup-thumb-glass">
+                  <CalendarIcon />
+                </div>
               </div>
               <div className="setup-row-body">
                 <div className="setup-row-title">
