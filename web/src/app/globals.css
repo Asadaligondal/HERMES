@@ -365,7 +365,7 @@ button { font-family: inherit; cursor: pointer; }
   border-radius: var(--radius-lg);
   font-size: 14px;
   font-weight: 500;
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--color-border);
   background: var(--color-secondary);
   color: var(--color-text);
 }
@@ -374,12 +374,41 @@ button { font-family: inherit; cursor: pointer; }
 .btn-primary {
   background: var(--color-highlight);
   color: #1a1626;
-  border: none;
+  border: 1.5px solid transparent;
   font-weight: 600;
 }
 .btn-primary:hover { filter: brightness(1.05); }
 .btn:disabled { opacity: 0.6; cursor: not-allowed; }
 .btn-block { width: 100%; justify-content: center; }
+
+/* Hermes signature: a subtle rotating glow traces a button's border on hover.
+   Degrades gracefully to a plain highlight-colored border on browsers that
+   don't support animating @property (older Firefox, etc.) — never broken,
+   just less shiny. */
+@property --btn-glow-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes btn-glow-spin {
+  to { --btn-glow-angle: 360deg; }
+}
+.btn:not(:disabled):hover,
+.btn:not(:disabled):focus-visible {
+  border-color: transparent;
+  background:
+    linear-gradient(var(--color-secondary), var(--color-secondary)) padding-box,
+    conic-gradient(from var(--btn-glow-angle), transparent 0deg, var(--color-highlight) 25deg, transparent 70deg) border-box;
+  animation: btn-glow-spin 3.5s linear infinite;
+  box-shadow: 0 0 12px -3px var(--color-highlight);
+}
+.btn-primary:not(:disabled):hover,
+.btn-primary:not(:disabled):focus-visible {
+  background:
+    linear-gradient(var(--color-highlight), var(--color-highlight)) padding-box,
+    conic-gradient(from var(--btn-glow-angle), transparent 0deg, #ffffff 25deg, transparent 70deg) border-box;
+  box-shadow: 0 0 12px -3px var(--color-highlight);
+}
 
 /* Badges */
 .badge {
